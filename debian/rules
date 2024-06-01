@@ -1,4 +1,19 @@
 #!/usr/bin/make -f
 
+export DH_GOLANG_EXCLUDES := example test
+export DH_GOLANG_INSTALL_EXTRA := benchmark/Makefile benchmark/testpaths.txt \
+	benchmark/testpaths.txt zipfs/test.zip
+
 %:
-	dh $@
+	dh $@ --buildsystem=golang --with=golang
+
+# The .gitignore files should probably not be in the .orig.tar.xz tarball
+# anyway, but in case they are, we'll make sure we delete the .gitignore
+# files
+override_dh_auto_install:
+	dh_auto_install -O--buildsystem=golang
+	rm -rf debian/golang-github-hanwen-go-fuse-dev/usr/bin
+	rm -rf debian/golang-github-hanwen-go-fuse-dev/usr/share/gocode/src/github.com/hanwen/go-fuse/example
+
+override_dh_auto_test:
+	# Can't test on autobuilders, so don't run the tests.
