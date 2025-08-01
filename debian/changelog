@@ -1,3 +1,9 @@
+golang-github-hanwen-go-fuse (2.4.2-3deepin1) unstable; urgency=medium
+
+  * fix arch sw64 LARGEFILE = 0x8000 and DIRECTORY = 0x8000, causing a conflict.
+
+ -- lichenggang <lichenggang@deepin.org>  Fri, 01 Aug 2025 14:38:51 +0800
+
 golang-github-hanwen-go-fuse (2.4.2-3) unstable; urgency=high
 
   * Team upload.
